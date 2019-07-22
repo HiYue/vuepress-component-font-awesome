@@ -31,3 +31,13 @@ yarn fa:build
 ```
 
 ## Use Font Awesome in your markdown
+
+In any of your markdown file, simply add:
+```markdown
+<Fa-AddressBook />
+```
+
+Add a red and 3x large icon:
+```markdown
+<Fa-AddressBook color="red" size="3x" />
+```
