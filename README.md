@@ -10,10 +10,6 @@ This plugin allows you to use Font Awesome icons in Vuepress markdown file direc
 ## Install
 - Step 1: Install dependency
 ```bash
-npm i vuepress-plugin-font-awesome
-```
-**OR**
-```bash
 yarn add vuepress-plugin-font-awesome
 ```
 - Step 2: Create a shortcut script, please add following codes  in your `package.json` file
@@ -44,7 +40,18 @@ In any of your markdown file, simply add:
 <Fa-AddressBook />
 ```
 
-Add a red and 3x large icon:
+Add props to icon:
 ```markdown
 <Fa-AddressBook color="red" size="3x" />
 ```
+
+**Here below are props you could pass:**
+
+- color: String, Color Hex Code
+- size: String, Font Awesome size class: 'lg', 'xs', 'sm', '1x', '2x', '3x', '4x', '5x', '6x', '7x', '8x', '9x', '10x'
+- pull: String, left/right
+- rotation: [String, Number], degrees such as 90/180/270
+- flip: String, such as 'horizontal', 'vertical', 'both'
+- spin: true/false
+- pulse: true/false
+- border: true/false
