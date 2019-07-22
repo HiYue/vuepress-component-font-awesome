@@ -2,7 +2,7 @@
 
 This plugin allows you to use Font Awesome icons in Vuepress markdown file directly. 
 
-``` markdown
+```markdown
 <!-- Insert a address book icon, red colour, 3x large size -->
 <Fa-AddressBook color="red" size="3x" />
 ```
