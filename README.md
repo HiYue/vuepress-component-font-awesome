@@ -1,6 +1,11 @@
 # Font Awesome component for Vuepress
 
 This plugin allows you to use Font Awesome icons in Vuepress markdown file directly. 
+> **Support regular and solid icons ONLY**
+
+## How to Use
+
+Each icon's used as a Vuepress component, so you just need to input a directive start with `Fa-` then follow the Capitalised font awesome icon class name, for example:
 
 ```markdown
 <!-- Insert a address book icon, red colour, 3x large size -->
