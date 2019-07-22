@@ -30,6 +30,13 @@ yarn add vuepress-plugin-font-awesome
 yarn fa:build
 ```
 
+> If in your project, you root folder is in other place, for example: 'docs', then pass the `dest` option:
+```bash
+yarn fa:build --dest=docs
+```
+
+The plugin will put the font awesome components in right place, which is `.vuepress/components/Fa`.
+
 ## Use Font Awesome in your markdown
 
 In any of your markdown file, simply add:
