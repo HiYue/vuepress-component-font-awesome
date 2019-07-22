@@ -8,4 +8,26 @@ This plugin allows you to use Font Awesome icons in Vuepress markdown file direc
 ```
 
 ## Install
-> This is not as usual npm packages, to get better use experience
+- Step 1: Install dependency
+```bash
+npm i vuepress-plugin-font-awesome
+```
+**OR**
+```bash
+yarn add vuepress-plugin-font-awesome
+```
+- Step 2: Create a shortcut script, please add following codes  in your `package.json` file
+```json
+  "scripts": {
+    "fa:build": "node node_modules/vuepress-plugin-font-awesome/index.js"
+  }
+```
+
+## Generate Font Awesome components
+
+> Simply run following command:
+```bash
+yarn fa:build
+```
+
+## Use Font Awesome in your markdown
