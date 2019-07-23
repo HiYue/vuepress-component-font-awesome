@@ -1,6 +1,6 @@
 {
   "name": "vuepress-plugin-font-awesome",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Use font awesome icon in the Vuepress markdown file directly",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "yargs": "^13.3.0"
+    "yargs": "^13.3.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.19",
+    "@fortawesome/free-solid-svg-icons": "^5.9.0",
+    "@fortawesome/vue-fontawesome": "^0.1.6"
   }
 }
