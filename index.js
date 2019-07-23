@@ -1,14 +1,21 @@
 const fs = require('fs')
 const path = require('path')
+const argv = require('yargs').argv
 const allIcons = require('./lib/all')
 const solidIcons = require('./lib/solid')
-const argv = require('yargs').argv
 
-let defaultDest = '/.vuepress/components'
+// keys of icons
+let keys = Object.keys(allIcons);
+let solidKeys = Object.keys(solidIcons);
+
+let defaultDotVuepressFolder = '/.vuepress';
+
 // get argument
 if(argv.dest){
-    defaultDest = argv.dest + defaultDest;
+    defaultDotVuepressFolder = argv.dest + defaultDotVuepressFolder;
 }
+
+let defaultDest = defaultDotVuepressFolder + '/components'
 
 console.log(defaultDest);
 
@@ -17,22 +24,49 @@ let targetFolder = path.resolve(__dirname, '../../' + defaultDest);
 console.log(targetFolder);
 
 if(!fs.existsSync(targetFolder)){
-    // Create folder
+    // Create components folder
     fs.mkdirSync(targetFolder);
     console.log('Target components folder is created!');
 }
 
 // Create fa folder
 targetFolder += '/Fa'
+
+// Let's check if the user has specified the icons
+try{
+    const configFile = path.resolve(__dirname, '../../' + defaultDotVuepressFolder + '/config.js');
+    let config = require(configFile);
+    if(typeof config.thirdPartyComponents !== 'undefined'){
+        if(typeof config.thirdPartyComponents.fontAwesomeIcons !== 'undefined'){
+            if(typeof config.thirdPartyComponents.fontAwesomeIcons.regular !== 'undefined' && config.thirdPartyComponents.fontAwesomeIcons.regular.length > 0){
+                // regular icons key
+                keys = config.thirdPartyComponents.fontAwesomeIcons.regular;
+            }
+            if(typeof config.thirdPartyComponents.fontAwesomeIcons.solid !== 'undefined' && config.thirdPartyComponents.fontAwesomeIcons.solid.length > 0){
+                // regular icons key
+                solidKeys = config.thirdPartyComponents.fontAwesomeIcons.solid;
+            }
+            // Remove all files from 'Fa' folder
+            if(fs.existsSync(targetFolder)){
+                fs.readdirSync(targetFolder).forEach((file) => {
+                    fs.unlinkSync(path.join(targetFolder, file));
+                })
+            }
+        }
+    }
+}
+catch(e){
+    console.log("Can not locate your .vuepress/config.js file ...")
+}
+
 if(!fs.existsSync(targetFolder)){
     // Create folder
     fs.mkdirSync(targetFolder);
     console.log('Target Fa folder is created!');
 }
+// It's ready to hold font awesome components
 
 console.log('Generating Font Awesome Icon components for you ...');
-
-const keys = Object.keys(allIcons);
 
 function jsUcfirst(string){
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -83,7 +117,10 @@ function getContentSolid(iconName, templateName){
     '</script>';
 }
 
-for(let i=0; i< keys.length; i++){
+// Create all regular icons
+const countRegularIcons = keys.length;
+// let strRegularIcons = keys.join(', ');
+for(let i=0; i< countRegularIcons; i++){
     let arr = keys[i].split('-');
     let filename = '';
     for(let j=0; j < arr.length; j++){
@@ -94,10 +131,12 @@ for(let i=0; i< keys.length; i++){
     filename = targetFolder + '/' + filename;
     fs.writeFileSync(filename, content);
 }
+// fs.writeFileSync(path.resolve(__dirname,'lib/regular-icons.txt'), strRegularIcons);
 
-const solidKeys = Object.keys(solidIcons);
-
-for(let i=0; i< solidKeys.length; i++){
+// Create all solid icons
+const countSolidIcons = solidKeys.length;
+// let strSolidIcons = solidKeys.join(', ');
+for(let i=0; i< countSolidIcons; i++){
     let arr = solidKeys[i].split('-');
     let filename = '';
     for(let j=0; j < arr.length; j++){
@@ -108,5 +147,6 @@ for(let i=0; i< solidKeys.length; i++){
     filename = targetFolder + '/' + filename;
     fs.writeFileSync(filename, content);
 }
+// fs.writeFileSync(path.resolve(__dirname,'lib/solid-icons.txt'), strSolidIcons);
 
 console.log('done! All your components are located in: ' + targetFolder);

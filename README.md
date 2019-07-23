@@ -3,6 +3,7 @@
 This plugin allows you to use Font Awesome icons in Vuepress markdown file directly. 
 > **Support regular and solid icons ONLY**
 
+---
 ## How to Use
 
 Each icon's used as a Vuepress component, so you just need to input a directive start with `Fa-` then follow the Capitalised font awesome icon class name, for example:
@@ -11,7 +12,7 @@ Each icon's used as a Vuepress component, so you just need to input a directive 
 <!-- Insert a address book icon, red colour, 3x large size -->
 <Fa-AddressBook color="red" size="3x" />
 ```
-
+---
 ## Install
 - Step 1: Install dependency
 ```bash
@@ -23,9 +24,10 @@ yarn add vuepress-plugin-font-awesome
     "fa:build": "node node_modules/vuepress-plugin-font-awesome/index.js"
   }
 ```
-
+---
 ## Generate Font Awesome components
 
+### Generate all font awesome icon components
 > Simply run following command:
 ```bash
 yarn fa:build
@@ -38,6 +40,38 @@ yarn fa:build --dest=docs
 
 The plugin will put the font awesome components in right place, which is `.vuepress/components/Fa`.
 
+### Generate specified icons only
+
+By default, there are 152 regular and 957 solid icon components will be generated, which is a huge amount. Instead of pack them all, you might want to only generate some specified icons based on your demand. To do so, simply put them in the .vuepress/config.js file as below:
+```javascript
+module.exports = {
+    title: 'Hello VuePress',
+    description: 'Just playing around',
+
+    // Please append following lines into your config.js
+    thirdPartyComponents: {
+        fontAwesomeIcons:{
+            regular:['address-card','file-audio'],  // Regular font awesome icon keys here
+            solid:['battery-quarter']               // Solid font awesome icon keys here
+        }
+    }
+  }
+```
+> If you don't know what icon's key you could use, please refer the following:
+- [Font Awesome Regular icons](./lib/regular-icons.txt)
+- [Font Awesome Solid icons](./lib/solid-icons.txt)
+
+The command is exactly same as above:
+```bash
+yarn fa:build
+```
+**OR**
+```bash
+yarn fa:build --dest=$YOUR_DOCS
+```
+
+
+---
 ## Use Font Awesome in your markdown
 
 In any of your markdown file, simply add:
@@ -60,3 +94,13 @@ Add props to icon:
 - spin: true/false
 - pulse: true/false
 - border: true/false
+
+---
+## Change Log
+
+- `v1.0.2`: 23/Jul/2019
+  - add specified icons generation feature
+  - add regular and solid icons key list file
+
+- `v1.0.1`: 22/Jul/2019
+  - Support all props to pass to the component
