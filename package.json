@@ -1,6 +1,6 @@
 {
   "name": "vuepress-plugin-font-awesome",
-  "version": "1.0.4",
+  "version": "1.90.5",
   "description": "Use font awesome icon in the Vuepress markdown file directly",
   "main": "index.js",
   "scripts": {
